@@ -7,7 +7,9 @@ public class BallMovement : MonoBehaviour
 
     [SerializeField] Rigidbody Rigidbody;
     [SerializeField] int framerate;
-    
+    [SerializeField] Vector3 Movement;
+    [SerializeField] float Horizontal,Vertical;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +26,13 @@ public class BallMovement : MonoBehaviour
     
 
     void Move(){
-        float Horizontal = Input.GetAxis("Horizontal");
-        float Vertical = Input.GetAxis("Vertical");
+         Horizontal = Input.GetAxis("Horizontal");
+         Vertical = Input.GetAxis("Vertical");
 
-        Vector3 Movement = new Vector3(Horizontal,0,Vertical);
-        Movement.Normalize();
+         Movement = new Vector3(Horizontal,0,Vertical);
+        //Movement.Normalize();
+
+         Movement = Vector3.ClampMagnitude(Movement, 1f);
 
         Rigidbody.AddForce(Movement * Time.deltaTime * MoveSpeed);
     }
