@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
+
+    public static GameManager instance;
+    public GameObject Player;
     [SerializeField] Transform KillZone;
 
     [SerializeField] Transform RespawnPosition;
 
     // Start is called before the first frame update
+
+    void Awake(){
+        instance = this;
+    }
     void Start()
     {
         

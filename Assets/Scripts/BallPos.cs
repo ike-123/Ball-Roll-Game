@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class BallPos : MonoBehaviour
 {
-    [SerializeField] Transform Ball;
+    public static BallPos instance;
+    public Transform Ball;
+
+    void Awake(){
+        instance = this;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
