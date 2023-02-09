@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SpeedBoost : MonoBehaviour
+using FishNet.Object;
+using FishNet.Connection;
+public class SpeedBoost : NetworkBehaviour
 {
-    [SerializeField] GameObject Player;
-    [SerializeField] float Force;
-   void OnTriggerEnter(Collider Other){
-    if(Other.tag == "Player"){
 
-        Player.GetComponent<Rigidbody>().AddForce(Force * transform.forward, ForceMode.Impulse);
+    [SerializeField] float Force;
+    void OnTriggerEnter(Collider Other){
+
+    if(Other.tag == "Player")
+    {
+        
+        if(PredictionManager.IsReplaying() == false){
+
+        Debug.Log("detected player on speed boost");
+        BallMovement Player = Other.gameObject.GetComponent<BallMovement>();
+        Player.SpeedBoost = true;
+        Player.BoostForce = Force;
+        Player.boostVector = transform.forward;
+        }
+
     }
    }
 }

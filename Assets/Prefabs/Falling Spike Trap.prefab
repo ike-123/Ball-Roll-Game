@@ -107,6 +107,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8278121943069824826}
   - component: {fileID: 8278121943069824827}
+  - component: {fileID: 7775137102063100991}
+  - component: {fileID: 3387585732874954132}
   m_Layer: 0
   m_Name: Falling Spike Trap
   m_TagString: Untagged
@@ -128,7 +130,7 @@ Transform:
   m_Children:
   - {fileID: 8278121942445213895}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8278121943069824827
 MonoBehaviour:
@@ -142,12 +144,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc952dcbe1ed4c08b2016d25961b7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 3387585732874954132}
+  _networkObjectCache: {fileID: 3387585732874954132}
   Endingpos: {x: 0, y: 0, z: 0}
   maxdistance: 20
-  Movespeed: 15
-  MoveUpspeed: 10
+  Movespeed: 10
+  MoveUpspeed: 5
   counter: 0
   down: 0
   up: 0
   timetogoup: 0
   timetogodown: 0
+--- !u!114 &7775137102063100991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278121943069824824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 3387585732874954132}
+  _networkObjectCache: {fileID: 3387585732874954132}
+  _synchronizeParent: 0
+  _packing:
+    Position: 1
+    Rotation: 1
+    Scale: 0
+  _interpolation: 1
+  _extrapolation: 0
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  _clientAuthoritative: 0
+  _sendToOwner: 0
+  _interval: 1
+  _synchronizePosition: 1
+  _positionSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeRotation: 0
+  _rotationSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeScale: 0
+  _scaleSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+--- !u!114 &3387585732874954132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278121943069824824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  _networkBehaviours:
+  - {fileID: 8278121943069824827}
+  - {fileID: 7775137102063100991}
+  <ParentNetworkObject>k__BackingField: {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
+  _isNetworked: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _predictedSpawningType: 0
+  _defaultDespawnType: 0
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 2
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 4082037893
+  <SceneId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 6007692076690365975
+  _sceneNetworkObjects:
+  - {fileID: 3387585732874954132}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

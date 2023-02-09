@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FishNet;
 public class GameManager : MonoBehaviour
 {
 
@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Transform RespawnPosition;
 
+    [SerializeField] int framerate;
     // Start is called before the first frame update
 
     void Awake(){
@@ -18,16 +19,21 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+ 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Player.transform.position.y < KillZone.position.y){
+        Application.targetFrameRate = framerate;
+
+        if(Player!= null){
+            if(Player.transform.position.y < KillZone.position.y){
 
            StartCoroutine(Respawn());
         }
+        }
+       
     }
 
     private IEnumerator Respawn(){

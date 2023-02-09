@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Connection;
+using FishNet.Object;
 
-public class RotatingPlatform : MonoBehaviour
+public class RotatingPlatform : NetworkBehaviour
 {
 
     [SerializeField] float RotateSpeed; 
@@ -16,6 +18,10 @@ public class RotatingPlatform : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Rotate(0,RotateSpeed,0);
+        if (base.IsServer)
+        {
+            transform.Rotate(0, RotateSpeed, 0);
+        }
+   
     }
 }

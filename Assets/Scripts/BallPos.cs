@@ -20,6 +20,9 @@ public class BallPos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Ball.position;
+        if(Ball!= null){
+            transform.position = Ball.position;
+        }
+        
     }
 }

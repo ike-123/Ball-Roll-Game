@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Connection;
+using FishNet.Object;
+using FishNet.Transporting;
 
-public class FallingSpiketrap : MonoBehaviour
+public class FallingSpiketrap : NetworkBehaviour
 {
     private Vector3 startingPos;
 
@@ -22,23 +25,31 @@ public class FallingSpiketrap : MonoBehaviour
 
     private RaycastHit Hit;
 
-   void Start()
-    {
-        startingPos = transform.position;
+    public override void OnStartServer(){
 
-        if(Physics.Raycast(startingPos,Vector3.down,out Hit,maxdistance)){
+        base.OnStartServer();
+        if (base.IsServer)
+        {
+            startingPos = transform.position;
 
-           Endingpos =  Hit.point;
-           down = true;
+            if(Physics.Raycast(startingPos,Vector3.down,out Hit,maxdistance)){
+            Endingpos =  Hit.point;
+            down = true;
+            }
         }
+       
     }
     void FixedUpdate()
     {   
         //lerp down
         // counter += Time.deltaTime;
+
+       if(base.IsServer)
+       {
+        MoveDown();
+        MoveUp();
+       }
        
-       MoveDown();
-       MoveUp();
 
         
         
