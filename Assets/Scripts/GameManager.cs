@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Transform RespawnPosition;
 
+
     [SerializeField] int framerate;
     // Start is called before the first frame update
 
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
- 
+        
     }
 
     // Update is called once per frame
@@ -33,16 +34,41 @@ public class GameManager : MonoBehaviour
            StartCoroutine(Respawn());
         }
         }
+
+        if(InstanceFinder.IsServer){
+
+            //Find the Players gameobect that just fell and call the server respawn
+            //function
+        }
        
     }
 
-    private IEnumerator Respawn(){
+    public IEnumerator Respawn(){
 
-        Player.gameObject.SetActive(false);
+        if(InstanceFinder.IsClient)
+        {
 
-       yield return new WaitForSeconds(1f);
+            Player.gameObject.SetActive(false);
 
-       Player.gameObject.transform.position = RespawnPosition.position;
-       Player.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+
+            Player.gameObject.transform.position = RespawnPosition.position;
+            Player.gameObject.SetActive(true);
+        }
+    }
+
+
+    public IEnumerator ServerRespawn(GameObject Player){
+
+        if(InstanceFinder.IsServer){
+
+            Player.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(1f);
+
+            Player.gameObject.transform.position = RespawnPosition.position;
+            Player.gameObject.SetActive(true);
+
+        }
     }
 }

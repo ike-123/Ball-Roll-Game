@@ -17,7 +17,7 @@ public class Jumppad : NetworkBehaviour
             {
                 if(PredictionManager.IsReplaying() == false){
 
-                    Debug.Log("player detected on jumppad");
+                  
 
                 BallMovement Player = Other.gameObject.GetComponent<BallMovement>();
 

@@ -16,6 +16,19 @@ public class BallMovement : NetworkBehaviour
 
     [SerializeField] int Downwardsray;
 
+    [SerializeField] Vector3 DragForce;
+
+    [SerializeField] Vector3 rawSpd;
+
+    [SerializeField] Vector3 horiDrag;
+
+    [SerializeField] float dragamount;
+
+
+    [SerializeField] float regulardrag;
+    [SerializeField] float slopedragamount;
+   [SerializeField] bool isOverSlope;
+
 
     public bool Jump;
     public float JumpForce;
@@ -25,6 +38,8 @@ public class BallMovement : NetworkBehaviour
      public float BoostForce;
 
      public Vector3 boostVector;
+
+     [SerializeField] GameObject ConveyerRoot;
 
     [SerializeField] float jumptimer;
     [SerializeField] float jumptime;
@@ -76,27 +91,34 @@ public class BallMovement : NetworkBehaviour
 
 
 
-    // Start is called before the first frame update
     public override void OnStartClient()
     {
-        
-        
         base.OnStartClient();
-        base.TimeManager.OnTick += TimeManager_OnTick;
-        base.TimeManager.OnPostTick += TimeManager_OnPostTick;
-        Rigidbody = GetComponent<Rigidbody>();
 
+        
         if(base.IsOwner)
         {
+            dragamount = regulardrag;
         GameManager.instance.Player = this.gameObject;
         BallPos.instance.Ball = this.gameObject.transform;
         }
     }
-
-
-    public override void OnStopClient()
+    // Start is called before the first frame update
+    public override void OnStartNetwork()
     {
-        base.OnStopClient();
+        
+        
+        base.OnStartNetwork();
+        base.TimeManager.OnTick += TimeManager_OnTick;
+        base.TimeManager.OnPostTick += TimeManager_OnPostTick;
+        Rigidbody = GetComponent<Rigidbody>();
+
+    }
+
+
+    public override void OnStopNetwork()
+    {
+        base.OnStopNetwork();
         base.TimeManager.OnTick -= TimeManager_OnTick;
         base.TimeManager.OnPostTick += TimeManager_OnPostTick;
     }
@@ -129,7 +151,7 @@ public class BallMovement : NetworkBehaviour
 
 
     void Update(){
-
+        
         if(Canjump == false){
 
             jumptimer -= Time.deltaTime;
@@ -156,7 +178,7 @@ public class BallMovement : NetworkBehaviour
         SpeedBoost =false;     
     }
 
-    
+    //Movement
     [Replicate]
         private void Move(MoveData md, bool asServer, Channel channel = Channel.Unreliable, bool replaying = false)
         {
@@ -167,20 +189,76 @@ public class BallMovement : NetworkBehaviour
         //move inbetween values of 0 and 1
         Movement = Vector3.ClampMagnitude(Movement, 1f);
 
-        Rigidbody.AddForce(Movement * MoveSpeed);
+
+        Rigidbody.AddForce(Movement * MoveSpeed,ForceMode.Force);
+
+        rawSpd = Rigidbody.velocity;
+        Vector3 horiSpd = rawSpd;
+        horiSpd.y = 0;
+        horiDrag = horiSpd * dragamount;//increase the percentage amount for more drag, and vice versa.
+        Rigidbody.velocity = rawSpd - horiDrag;
+
 
         Debug.DrawRay(transform.position,Vector3.down * Downwardsray, Color.black);
-       if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit,Downwardsray)){
+       if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit,Downwardsray))
+       
+       {
 
-        if(RaycastHit.transform.tag == "RotatingPlatform"){
-
-            transform.SetParent(RaycastHit.transform.parent);
-
+        if(RaycastHit.transform.tag == "RotatingPlatform")
+        {
+            
+           transform.SetParent(RaycastHit.transform.parent);
         }
+
+        if(RaycastHit.transform.tag == "ConveyerBelt"){
+
+            ConveyerBelt ConveyerBelt = RaycastHit.transform.gameObject.GetComponent<ConveyerBelt>();
+            
+            Debug.Log("adding");
+            
+            // if(ConveyerRoot == null){
+
+            //      Debug.Log("2");
+            // ConveyerRoot = new GameObject();
+            // ConveyerRoot.transform.position = transform.position;
+            // ConveyerRoot.name = "ConveyerRoot";
+            //  Debug.Log("3");
+            // }
+         
+
+            // transform.SetParent(ConveyerRoot.transform);
+            // ConveyerRoot.transform.Translate(ConveyerBelt.transform.forward * ConveyerBelt.speed* Time.deltaTime);
+
+            Rigidbody.AddForce(ConveyerBelt.speed * ConveyerBelt.transform.forward);
+        }
+
+            var floorAngle = Vector3.Angle(RaycastHit.normal, Vector3.up);
+
+
+            isOverSlope = floorAngle > 0F;
+
+            if(isOverSlope && Movement.magnitude == 0f){
+
+                dragamount = slopedragamount;
+            }
+
+            else{
+                dragamount = regulardrag;
+            }
+
        }
 
-       else{
+       else
+       {
+
+
+
+        Debug.Log("DESTRORY");
+
         transform.SetParent(null);
+
+        
+
        }
 
         if(md.Jump)
@@ -194,13 +272,8 @@ public class BallMovement : NetworkBehaviour
 
                 Rigidbody.AddForce(JumpForce * Vector3.up, ForceMode.Impulse);
 
-                if(IsServer){
-                    Debug.Log($"Applied a force of {JumpForce} from server");
-                }
-
-                if(IsClient){
-                    Debug.Log($"Applied a force of {JumpForce} from Client");
-                }
+       
+                
         }
 
         if(md.SpeedBoost)

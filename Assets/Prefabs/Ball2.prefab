@@ -46,7 +46,7 @@ Rigidbody:
   m_GameObject: {fileID: 2914658839817402076}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 4
+  m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -73,12 +73,20 @@ MonoBehaviour:
   framerate: 0
   Movement: {x: 0, y: 0, z: 0}
   Downwardsray: 2
+  DragForce: {x: 0, y: 0, z: 0}
+  rawSpd: {x: 0, y: 0, z: 0}
+  horiDrag: {x: 0, y: 0, z: 0}
+  dragamount: 0
+  regulardrag: 0.15
+  slopedragamount: 0
+  isOverSlope: 0
   Jump: 0
   JumpForce: 0
   Canjump: 1
   SpeedBoost: 0
   BoostForce: 0
   boostVector: {x: 0, y: 0, z: 0}
+  ConveyerRoot: {fileID: 0}
   jumptimer: 0.5
   jumptime: 0.5
 --- !u!114 &2914658839817402081
@@ -107,7 +115,7 @@ MonoBehaviour:
   _predictedSpawningType: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 4
+  <PrefabId>k__BackingField: 5
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
