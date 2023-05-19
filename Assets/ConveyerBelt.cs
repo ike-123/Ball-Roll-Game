@@ -21,120 +21,120 @@ public class ConveyerBelt : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+    // }
 
-    // // Update is called once per frame
-    // void Update()
-    // {   
-    //    if(InstanceFinder.IsServer){
+//     // Update is called once per frame
+//     void Update()
+//     {   
+//        if(InstanceFinder.IsServer){
         
-    //         for(int i = 0; i < Players.Count; i ++){
+//             for(int i = 0; i < Players.Count; i ++){
 
-    //         Debug.Log("server");
-    //         Players[i].transform.Translate(transform.forward * speed* Time.deltaTime);
+//             Debug.Log("server");
+//             Players[i].transform.Translate(transform.forward * speed* Time.deltaTime);
 
-    //     }
-    //    }
+//         }
+//        }
 
-    //    if(InstanceFinder.IsClient){
+//        if(InstanceFinder.IsClient){
 
-    //     if(addforce){
-    //         Debug.Log("client");
-    //         root.transform.Translate(transform.forward * speed* Time.deltaTime);
-    //     }
-    //    }
+//         if(addforce){
+//             Debug.Log("client");
+//             root.transform.Translate(transform.forward * speed* Time.deltaTime);
+//         }
+//        }
       
            
 
         
           
-    // }
+//     }
 
-    // private void OnCollisionEnter(Collision collision){
+//     private void OnCollisionEnter(Collision collision){
 
         
-    //     if(collision.gameObject.tag == "Player")
+//         if(collision.gameObject.tag == "Player")
         
-    //     {
+//         {
            
-    //     if( InstanceFinder.IsServer)
-    //     {
-    //         Debug.Log("adding");
-    //         GameObject root = new GameObject();
+//         if( InstanceFinder.IsServer)
+//         {
+//             Debug.Log("adding");
+//             GameObject root = new GameObject();
 
-    //         collision.gameObject.transform.SetParent(root.transform);
+//             collision.gameObject.transform.SetParent(root.transform);
 
-    //         Players.Add(root);
-    //     }
+//             Players.Add(root);
+//         }
         
-    //     if(collision.gameObject.GetComponent<NetworkObject>().IsOwner)
-    //     {
+//         if(collision.gameObject.GetComponent<NetworkObject>().IsOwner)
+//         {
 
-    //         root = new GameObject();
+//             root = new GameObject();
             
-    //         Player = collision.gameObject;
+//             Player = collision.gameObject;
 
-    //         Player.transform.SetParent(root.transform);
+//             Player.transform.SetParent(root.transform);
 
-    //         addforce = true;
+//             addforce = true;
 
 
-    //     }
+//         }
 
               
-    //     }
-    // }
+//         }
+//     }
 
-    //  private void OnCollisionExit(Collision collision){
-    //     if(collision.gameObject.tag == "Player"){
+//      private void OnCollisionExit(Collision collision){
+//         if(collision.gameObject.tag == "Player"){
             
 
-    //     if( InstanceFinder.IsServer)
-    //     {   
-    //         Player2 = collision.gameObject;
-    //         Debug.Log($"player name: {Player2.name}");
-    //         Debug.Log($"transform name: {Player2.transform.name}");
+//         if( InstanceFinder.IsServer)
+//         {   
+//             Player2 = collision.gameObject;
+//             Debug.Log($"player name: {Player2.name}");
+//             Debug.Log($"transform name: {Player2.transform.name}");
 
-    //           Debug.Log($"parent name: {Player2.transform.parent.name}");
-    //           Debug.Log($"parent GO name: {Player2.transform.parent.gameObject.name}");
+//               Debug.Log($"parent name: {Player2.transform.parent.name}");
+//               Debug.Log($"parent GO name: {Player2.transform.parent.gameObject.name}");
 
             
-    //             Parent = Player2.transform.parent.gameObject;
+//                 Parent = Player2.transform.parent.gameObject;
             
             
 
 
-    //         Debug.Log("saving parent");
+//             Debug.Log("saving parent");
      
 
-    //          Player2.transform.SetParent(null);
+//              Player2.transform.SetParent(null);
 
-    //          Debug.Log("done");
-    //         Players.Remove(Parent);
-    //          Destroy(Parent);
-    //     }
+//              Debug.Log("done");
+//             Players.Remove(Parent);
+//              Destroy(Parent);
+//         }
         
-    //     if(collision.gameObject.GetComponent<NetworkObject>().IsOwner)
-    //     {
-    //         Debug.Log("isownerexit");
+//         if(collision.gameObject.GetComponent<NetworkObject>().IsOwner)
+//         {
+//             Debug.Log("isownerexit");
             
 
-    //         addforce = false;
-    //         Player.transform.SetParent(null);
-    //         Destroy(root);
+//             addforce = false;
+//             Player.transform.SetParent(null);
+//             Destroy(root);
 
 
             
 
 
 
-    //     }
+//         }
        
-    //     }
-    // }
+//         }
+//     }
 
 
-}
+ }

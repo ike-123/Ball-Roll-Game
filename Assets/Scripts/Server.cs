@@ -42,6 +42,6 @@ public class Server : NetworkBehaviour
     [ObserversRpc]
     private void enablegotext()
     {
-        UiManager.instance.enablegotext();
+      //  UiManager.instance.enablegotext();
     }
 }

@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1343644360683564802}
   m_Father: {fileID: 0}
-  m_RootOrder: 66
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1343644359733879118
 MonoBehaviour:
@@ -50,7 +50,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 1343644359733879105}
   _networkObjectCache: {fileID: 1343644359733879105}
-  EndingPos: 30
+  EndingPos: 25
   speed: 3
 --- !u!114 &1343644359733879104
 MonoBehaviour:
@@ -119,18 +119,13 @@ MonoBehaviour:
   _predictedSpawningType: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 1
+  <PrefabId>k__BackingField: 2
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 4082037893
+  _scenePathHash: 128377683
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 4351001287235886391
   _sceneNetworkObjects:
   - {fileID: 1343644359733879105}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -239,8 +234,16 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343644360683564814}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

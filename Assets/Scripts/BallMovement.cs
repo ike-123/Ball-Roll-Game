@@ -30,6 +30,11 @@ public class BallMovement : NetworkBehaviour
    [SerializeField] bool isOverSlope;
 
 
+    [SerializeField]float rotationSpeed = 1f; // Speed of rotation in degrees per second
+    [SerializeField] float radius = 1f; // Radius of the circle
+
+    [SerializeField] float angle = 0f;
+
     public bool Jump;
     public float JumpForce;
     public bool Canjump;
@@ -189,7 +194,7 @@ public class BallMovement : NetworkBehaviour
         //move inbetween values of 0 and 1
         Movement = Vector3.ClampMagnitude(Movement, 1f);
 
-
+        Debug.Log("checking");
         Rigidbody.AddForce(Movement * MoveSpeed,ForceMode.Force);
 
         rawSpd = Rigidbody.velocity;
@@ -198,6 +203,26 @@ public class BallMovement : NetworkBehaviour
         horiDrag = horiSpd * dragamount;//increase the percentage amount for more drag, and vice versa.
         Rigidbody.velocity = rawSpd - horiDrag;
 
+    
+    
+    //     // Current angle around the circle
+
+    
+    //   // Calculate the position on the circle based on the current angle
+    //     Vector3 position = transform.position + Quaternion.Euler(0f, angle, 0f) * Vector3.right * radius;
+
+    //     // Set the Rigidbody's position to the calculated position
+    //     GetComponent<Rigidbody>().MovePosition(position);
+
+    //     // Increment the angle based on the rotation speed and the time since the last FixedUpdate
+    //     angle += rotationSpeed * Time.fixedDeltaTime;
+
+    //     // Wrap the angle around at 360 degrees to prevent it from getting too large
+    //     angle %= 360f;
+
+    //     Rigidbody.AddForce(transform.right * 2,ForceMode.Impulse);
+    
+    
 
         Debug.DrawRay(transform.position,Vector3.down * Downwardsray, Color.black);
        if(Physics.Raycast(transform.position,Vector3.down,out RaycastHit,Downwardsray))
@@ -214,20 +239,6 @@ public class BallMovement : NetworkBehaviour
 
             ConveyerBelt ConveyerBelt = RaycastHit.transform.gameObject.GetComponent<ConveyerBelt>();
             
-            Debug.Log("adding");
-            
-            // if(ConveyerRoot == null){
-
-            //      Debug.Log("2");
-            // ConveyerRoot = new GameObject();
-            // ConveyerRoot.transform.position = transform.position;
-            // ConveyerRoot.name = "ConveyerRoot";
-            //  Debug.Log("3");
-            // }
-         
-
-            // transform.SetParent(ConveyerRoot.transform);
-            // ConveyerRoot.transform.Translate(ConveyerBelt.transform.forward * ConveyerBelt.speed* Time.deltaTime);
 
             Rigidbody.AddForce(ConveyerBelt.speed * ConveyerBelt.transform.forward);
         }
