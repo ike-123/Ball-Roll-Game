@@ -29,11 +29,18 @@ public class BallMovement : NetworkBehaviour
     [SerializeField] float slopedragamount;
    [SerializeField] bool isOverSlope;
 
+   [SerializeField] bool TouchscreenJoystick;
+
 
     [SerializeField]float rotationSpeed = 1f; // Speed of rotation in degrees per second
     [SerializeField] float radius = 1f; // Radius of the circle
 
     [SerializeField] float angle = 0f;
+
+    float Horizontal;
+    float Vertical;
+
+    DynamicJoystick dynamicJoystick;
 
     public bool Jump;
     public float JumpForce;
@@ -106,6 +113,7 @@ public class BallMovement : NetworkBehaviour
             dragamount = regulardrag;
         GameManager.instance.Player = this.gameObject;
         BallPos.instance.Ball = this.gameObject.transform;
+        dynamicJoystick = UiManager.instance.DynamicJoystick;
         }
     }
     // Start is called before the first frame update
@@ -171,9 +179,21 @@ public class BallMovement : NetworkBehaviour
     private void CheckInput(out MoveData md){
 
         md = default;
+        
+     
 
-        float Horizontal = Input.GetAxis("Horizontal");
-        float Vertical = Input.GetAxis("Vertical");
+        if(!TouchscreenJoystick){
+
+             Horizontal = Input.GetAxis("Horizontal");
+             Vertical = Input.GetAxis("Vertical");
+        }
+
+        else
+        {
+            Horizontal = dynamicJoystick.Horizontal;
+            Vertical = dynamicJoystick.Vertical;
+        }
+        
 
         if (Horizontal == 0f && Vertical == 0f && !Jump && !SpeedBoost)
                 return;

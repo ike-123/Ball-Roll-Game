@@ -91,6 +91,7 @@ MonoBehaviour:
   regulardrag: 0.15
   slopedragamount: 0
   isOverSlope: 0
+  TouchscreenJoystick: 1
   rotationSpeed: 16
   radius: 0.008
   angle: 0

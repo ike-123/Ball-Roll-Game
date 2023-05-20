@@ -7,6 +7,8 @@ public class UiManager : MonoBehaviour
 
     public static UiManager instance;
 
+    public DynamicJoystick DynamicJoystick;
+
     [SerializeField] GameObject GoText;
 
     private void Awake()
@@ -26,8 +28,5 @@ public class UiManager : MonoBehaviour
         
     }
 
-    public void enablegotext()
-    {
-        GoText.SetActive(true);
-    }
+  
 }
